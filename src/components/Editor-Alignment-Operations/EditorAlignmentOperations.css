@@ -1,0 +1,38 @@
+.align-op {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-right: 1px solid #cccccc;
+  padding: 0 10px;
+  height: 70px;
+}
+
+.top-align-op {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.align-op-btn {
+  margin: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.align-op-btn:hover {
+  color: #004aad;
+}
+
+.bottom-align-op {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

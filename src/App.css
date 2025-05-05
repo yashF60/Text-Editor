@@ -1,0 +1,22 @@
+.main-app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 900px;
+  border-radius: 10px;
+  margin:20px;
+  box-shadow: 2px 2px 12px black;
+}
+
+.main-app-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  background-color: #a0a2b0;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}

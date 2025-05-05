@@ -1,0 +1,50 @@
+.meta-op {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 10px;
+  height: 70px;
+  gap: 10px;
+}
+
+.meta-op-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.meta-op-btn:hover {
+  color: #004aad;
+}
+
+.link-input-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 600px;
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 20px;
+}
+
+.link-input {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.apply-link-btn {
+  background-color: #004aad;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}

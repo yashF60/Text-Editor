@@ -1,0 +1,45 @@
+.main-editor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+}
+
+.editor-comp {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 10px 20px;
+}
+
+.main-text-area {
+  width: 100%;
+  resize: none;
+  padding: 10px 10px 10px 20px;
+  border: 1px solid #cccccc;
+}
+
+.main-text-area:active {
+  border: 1px solid #cccccc;
+}
+
+.main-text-area:focus {
+  border: 1px solid #cccccc;
+  outline: none;
+}
+
+font[face="Poppins"] {
+  font-family: "Poppins", sans-serif;
+}
+font[face="Roboto"] {
+  font-family: "Roboto", sans-serif;
+}
+font[face="Arial"] {
+  font-family: Arial, sans-serif;
+}
+font[face="Comic Sans MS"] {
+  font-family: "Comic Sans MS", cursive;
+}

@@ -1,0 +1,110 @@
+.font-op {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  border-right: 1px solid #cccccc;
+  padding: 0 10px 0 0;
+}
+
+.top-font-op {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.font-fam {
+  width: 160px;
+  height: 30px;
+  margin: 0 10px;
+  border-radius: 2px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.font-fam:hover {
+  color: #004aad;
+}
+
+.font-sz {
+  width: 40px;
+  margin: 0 10px;
+  border-radius: 2px;
+  outline: none;
+  transition: 0.3s;
+  height: 30px;
+}
+
+.font-sz:hover {
+  color: #004aad;
+}
+
+.font-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.font-btn {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.font-btn:hover {
+  color: #004aad;
+}
+
+.bottom-font-op {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.bottom-font-op button {
+  margin: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.bottom-font-op button:hover {
+  color: #004aad;
+}
+
+/* ............................................ */
+
+.main-text-area font[size] {
+  font-size: inherit !important;
+}
+
+.font-btn.active {
+  color: #004aad;
+  transition: 0s;
+}
+
+.colour-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.colour-picker label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
