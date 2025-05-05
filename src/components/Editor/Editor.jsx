@@ -32,6 +32,7 @@ const Editor = () => {
         onKeyUp={handleFormatUpdate}
         suppressContentEditableWarning={true}
       />
+      <p className="word-count">0/2500</p>
     </div>
   );
 };

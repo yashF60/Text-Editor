@@ -1,103 +1,115 @@
 import React, {
-  createContext,
-  useContext,
-  useRef,
-  useState,
-  useEffect,
-} from "react";
-
-const EditorContext = createContext();
-
-export const EditorProvider = ({ children }) => {
-  const [activeFormats, setActiveFormats] = useState({
-    bold: false,
-    italic: false,
-    underline: false,
-    strikeThrough: false,
-    justifyLeft: false,
-    justifyCenter: false,
-    justifyRight: false,
-    justifyFull: false,
-    unorderedList: false,
-    orderedList: false,
-  });
-
-  const editorRef = useRef(null);
-  const [content, setContent] = useState("");
-  const [savedSelection, setSavedSelection] = useState(null);
-
-  const handleCommand = (command, value = null) => {
-    const selection = document.getSelection();
-    if (!selection.rangeCount) return;
-    document.execCommand(command, false, value);
-    editorRef.current.focus();
-  };
-
-  const handleInput = () => {
-    setContent(editorRef.current.innerHTML);
-    updateActiveFormats();
-  };
-
-  //--------------------------------------------------//
-
-  const updateActiveFormats = () => {
-    setActiveFormats({
-      bold: document.queryCommandState("bold"),
-      italic: document.queryCommandState("italic"),
-      underline: document.queryCommandState("underline"),
-      strikeThrough: document.queryCommandState("strikeThrough"),
-      justifyLeft: document.queryCommandState("justifyLeft"),
-      justifyCenter: document.queryCommandState("justifyCenter"),
-      justifyRight: document.queryCommandState("justifyRight"),
-      justifyFull: document.queryCommandState("justifyFull"),
-      unorderedList: document.queryCommandState("insertUnorderedList"),
-      orderedList: document.queryCommandState("insertOrderedList"),
+    createContext,
+    useContext,
+    useRef,
+    useState,
+    useEffect,
+  } from "react";
+  
+  const EditorContext = createContext();
+  
+  export const EditorProvider = ({ children }) => {
+    const [activeFormats, setActiveFormats] = useState({
+      bold: false,
+      italic: false,
+      underline: false,
+      strikeThrough: false,
+      justifyLeft: false,
+      justifyCenter: false,
+      justifyRight: false,
+      justifyFull: false,
+      unorderedList: false,
+      orderedList: false,
     });
-  };
+  
+    const editorRef = useRef(null);
+    const [content, setContent] = useState("");
+    const [savedSelection, setSavedSelection] = useState(null);
 
-  useEffect(() => {
-    document.addEventListener("selectionchange", updateActiveFormats);
-    return () => {
-      document.removeEventListener("selectionchange", updateActiveFormats);
+    // console.log(content)
+  
+    const handleCommand = (command, value = null) => {
+      const selection = document.getSelection();
+      if (!selection.rangeCount) return;
+      document.execCommand(command, false, value);
+      editorRef.current.focus();
     };
-  }, []);
-
-  //--------------------------------------------------//
-
-  const saveSelection = () => {
-    const selection = window.getSelection();
-    if (selection.rangeCount > 0) {
-      setSavedSelection(selection.getRangeAt(0));
-    }
-  };
-
-  const restoreSelection = () => {
-    if (savedSelection) {
+  
+    const handleInput = () => {
+      setContent(editorRef.current.innerHTML);
+      updateActiveFormats();
+    };
+  
+    //--------------------------------------------------//
+  
+    const updateActiveFormats = () => {
       const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(savedSelection);
-    }
+      const range = selection.getRangeAt(0);
+      const selectedNode = range.startContainer;
+      const checkNodeForStyle = (node, style) => {
+        if (!node) return false;
+        if (node.nodeType === 3) {
+          return false;
+        }
+        return node.closest(style) !== null;
+      };
+  
+      setActiveFormats({
+        bold: checkNodeForStyle(selectedNode, "strong"),
+        italic: checkNodeForStyle(selectedNode, "em"),
+        underline: checkNodeForStyle(selectedNode, "u"),
+        strikeThrough: checkNodeForStyle(selectedNode, "s"),
+        justifyLeft: checkNodeForStyle(selectedNode, "div[style*='text-align: left']"),
+        justifyCenter: checkNodeForStyle(selectedNode, "div[style*='text-align: center']"),
+        justifyRight: checkNodeForStyle(selectedNode, "div[style*='text-align: right']"),
+        justifyFull: checkNodeForStyle(selectedNode, "div[style*='text-align: justify']"),
+        unorderedList: checkNodeForStyle(selectedNode, "ul"),
+        orderedList: checkNodeForStyle(selectedNode, "ol"),
+      });
+    };
+  
+    useEffect(() => {
+      document.addEventListener("selectionchange", updateActiveFormats);
+      return () => {
+        document.removeEventListener("selectionchange", updateActiveFormats);
+      };
+    }, []);
+  
+    //--------------------------------------------------//
+  
+    const saveSelection = () => {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        setSavedSelection(selection.getRangeAt(0));
+      }
+    };
+  
+    const restoreSelection = () => {
+      if (savedSelection) {
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(savedSelection);
+      }
+    };
+  
+    return (
+      <EditorContext.Provider
+        value={{
+          editorRef,
+          content,
+          setContent,
+          handleCommand,
+          handleInput,
+          activeFormats,
+          saveSelection,
+          restoreSelection,
+        }}
+      >
+        {children}
+      </EditorContext.Provider>
+    );
   };
-
-  //   console.log(content)
-
-  return (
-    <EditorContext.Provider
-      value={{
-        editorRef,
-        content,
-        setContent,
-        handleCommand,
-        handleInput,
-        activeFormats,
-        saveSelection,
-        restoreSelection,
-      }}
-    >
-      {children}
-    </EditorContext.Provider>
-  );
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useEditor = () => useContext(EditorContext);
+  
+  // eslint-disable-next-line react-refresh/only-export-components
+  export const useEditor = () => useContext(EditorContext);
+  
