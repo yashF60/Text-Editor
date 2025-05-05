@@ -15,6 +15,7 @@ const Editor = () => {
     updateActiveFormats: handleFormatUpdate,
   } = useEditor();
 
+
   return (
     <div className="main-editor">
       <div className="editor-comp">
@@ -32,7 +33,10 @@ const Editor = () => {
         onKeyUp={handleFormatUpdate}
         suppressContentEditableWarning={true}
       />
-      <p className="word-count">0/2500</p>
+
+      <p className="word-count">
+        {0}/{2500}
+      </p>
     </div>
   );
 };
