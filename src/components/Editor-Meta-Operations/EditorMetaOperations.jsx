@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./EditorMetaOperations.css";
 
 import { IoMdLink } from "react-icons/io";
@@ -19,6 +19,20 @@ const EditorMetaOperations = () => {
     }
   };
 
+  const fileInputRef = useRef(null);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageUrl = reader.result;
+      document.execCommand("insertImage", false, imageUrl);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div>
       <div className="meta-op">
@@ -31,9 +45,20 @@ const EditorMetaOperations = () => {
         >
           <IoMdLink />
         </button>
-        <button className="meta-op-btn" onClick={() => alert("Coming soon")}>
+
+        <button
+          className="meta-op-btn"
+          onClick={() => fileInputRef.current.click()}
+        >
           <BsCardImage />
         </button>
+        <input
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          ref={fileInputRef}
+          onChange={handleImageUpload}
+        />
       </div>
 
       {showLinkInput && (
