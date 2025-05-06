@@ -25,27 +25,17 @@ export const EditorProvider = ({ children }) => {
   const editorRef = useRef(null);
   const [content, setContent] = useState("");
   const [savedSelection, setSavedSelection] = useState(null);
-
-  // console.log(content)
-
-  // const handleCommand = (command, value = null) => {
-  //   const selection = document.getSelection();
-  //   if (!selection.rangeCount) return;
-  //   document.execCommand(command, false, value);
-  //   editorRef.current.focus();
-  // };
+  const [wordCount, setWordCount] = useState(0);
 
   const handleCommand = (command, value = null) => {
     const selection = document.getSelection();
     if (!selection.rangeCount) return;
 
     if (command === "fontSize") {
-      // Only allow values 1–7 as required by execCommand
       const size = parseInt(value);
       if (size >= 1 && size <= 7) {
         document.execCommand("fontSize", false, size);
 
-        // Optional: Replace <font size="X"> with inline styles
         const fonts = editorRef.current.querySelectorAll("font[size]");
         fonts.forEach((font) => {
           const pxMap = {
@@ -123,6 +113,7 @@ export const EditorProvider = ({ children }) => {
 
   const handleInput = () => {
     setContent(editorRef.current.innerHTML);
+    setWordCount(editorRef.current?.innerText.length || 0);
     updateActiveFormats();
   };
 
@@ -154,6 +145,8 @@ export const EditorProvider = ({ children }) => {
         activeFormats,
         saveSelection,
         restoreSelection,
+        wordCount,
+        setWordCount,
       }}
     >
       {children}
