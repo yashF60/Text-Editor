@@ -52,3 +52,8 @@ font[face="Comic Sans MS"] {
   width: 100%;
   margin: 20px 20px 0 0;
 }
+
+.main-editor a {
+  color: green;
+  cursor: pointer;
+}

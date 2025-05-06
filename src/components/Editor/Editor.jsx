@@ -16,7 +16,7 @@ const Editor = () => {
     setWordCount,
   } = useEditor();
 
-  const handleInput = (e) => {
+  const handleInput = () => {
     const text = editorRef.current?.innerText || "";
 
     if (text.length > 2500) {
@@ -48,14 +48,13 @@ const Editor = () => {
       <div
         ref={editorRef}
         contentEditable={true}
-        // contentEditable={wordCount < 1000}
         className="main-text-area"
         onInput={handleInput}
         onClick={handleFormatUpdate}
         onKeyUp={handleFormatUpdate}
         suppressContentEditableWarning={true}
       />
-      <p className="word-count">
+      <p className="word-count"> 
         {wordCount}/{2500}
       </p>
     </div>
