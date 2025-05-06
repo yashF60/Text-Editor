@@ -54,6 +54,7 @@ font[face="Comic Sans MS"] {
 }
 
 .main-editor a {
-  color: green;
+  color: blue;
+  text-decoration: underline;
   cursor: pointer;
 }

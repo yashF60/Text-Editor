@@ -35,8 +35,6 @@ const Editor = () => {
     }
   };
 
-  console.log(wordCount);
-
   return (
     <div className="main-editor">
       <div className="editor-comp">
@@ -54,7 +52,7 @@ const Editor = () => {
         onKeyUp={handleFormatUpdate}
         suppressContentEditableWarning={true}
       />
-      <p className="word-count"> 
+      <p className="word-count">
         {wordCount}/{2500}
       </p>
     </div>

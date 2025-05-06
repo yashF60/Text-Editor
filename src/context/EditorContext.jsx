@@ -134,6 +134,8 @@ export const EditorProvider = ({ children }) => {
     }
   };
 
+  console.log(content)
+
   return (
     <EditorContext.Provider
       value={{

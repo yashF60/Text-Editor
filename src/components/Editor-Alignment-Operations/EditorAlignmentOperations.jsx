@@ -7,7 +7,6 @@ import {
   CiTextAlignRight,
   CiTextAlignJustify,
 } from "react-icons/ci";
-
 import { MdFormatListBulleted, MdFormatListNumbered } from "react-icons/md";
 
 import { useEditor } from "../../context/EditorContext";
