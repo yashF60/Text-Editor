@@ -28,11 +28,50 @@ export const EditorProvider = ({ children }) => {
 
   // console.log(content)
 
+  // const handleCommand = (command, value = null) => {
+  //   const selection = document.getSelection();
+  //   if (!selection.rangeCount) return;
+  //   document.execCommand(command, false, value);
+  //   editorRef.current.focus();
+  // };
+
   const handleCommand = (command, value = null) => {
     const selection = document.getSelection();
     if (!selection.rangeCount) return;
-    document.execCommand(command, false, value);
+
+    if (command === "fontSize") {
+      // Only allow values 1–7 as required by execCommand
+      const size = parseInt(value);
+      if (size >= 1 && size <= 7) {
+        document.execCommand("fontSize", false, size);
+
+        // Optional: Replace <font size="X"> with inline styles
+        const fonts = editorRef.current.querySelectorAll("font[size]");
+        fonts.forEach((font) => {
+          const pxMap = {
+            1: "10px",
+            2: "13px",
+            3: "16px",
+            4: "18px",
+            5: "24px",
+            6: "32px",
+            7: "48px",
+          };
+          const sizeAttr = font.getAttribute("size");
+          if (pxMap[sizeAttr]) {
+            font.removeAttribute("size");
+            font.style.fontSize = pxMap[sizeAttr];
+          }
+        });
+      }
+    } else if (command === "fontName") {
+      document.execCommand("fontName", false, value);
+    } else {
+      document.execCommand(command, false, value);
+    }
+
     editorRef.current.focus();
+    updateActiveFormats();
   };
 
   //--------------------------------------------------//

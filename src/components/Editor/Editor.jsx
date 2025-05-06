@@ -15,7 +15,6 @@ const Editor = () => {
     updateActiveFormats: handleFormatUpdate,
   } = useEditor();
 
-
   return (
     <div className="main-editor">
       <div className="editor-comp">
