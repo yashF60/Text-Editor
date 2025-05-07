@@ -28,8 +28,25 @@ const EditorMetaOperations = () => {
     const reader = new FileReader();
     reader.onload = () => {
       const imageUrl = reader.result;
-      document.execCommand("insertImage", false, imageUrl);
+
+      const img = document.createElement("img");
+      img.src = imageUrl;
+      img.alt = "Uploaded Image";
+      img.style.maxWidth = "100%";
+
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+
+      const range = selection.getRangeAt(0);
+      range.deleteContents();
+      range.insertNode(img);
+
+      range.setStartAfter(img);
+      range.setEndAfter(img);
+      selection.removeAllRanges();
+      selection.addRange(range);
     };
+
     reader.readAsDataURL(file);
   };
 

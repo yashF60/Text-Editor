@@ -22,6 +22,9 @@ export const EditorProvider = ({ children }) => {
     orderedList: false,
   });
 
+  const [showLinkModal, setShowLinkModal] = useState(false);
+  const [selectedLinkNode, setSelectedLinkNode] = useState(null);
+
   const editorRef = useRef(null);
   const [content, setContent] = useState("");
   const [savedSelection, setSavedSelection] = useState(null);
@@ -134,7 +137,9 @@ export const EditorProvider = ({ children }) => {
     }
   };
 
-  console.log(content)
+  // =====================
+  // console.log(content);
+  // =====================
 
   return (
     <EditorContext.Provider
@@ -149,6 +154,11 @@ export const EditorProvider = ({ children }) => {
         restoreSelection,
         wordCount,
         setWordCount,
+        showLinkModal,
+        setShowLinkModal,
+        selectedLinkNode,
+        setSelectedLinkNode,
+        updateActiveFormats,
       }}
     >
       {children}
