@@ -19,7 +19,6 @@
   margin: 0 10px;
   border-radius: 2px;
   outline: none;
-  /* transition: 0.3s; */
 }
 
 .font-fam:hover {
@@ -27,7 +26,7 @@
 }
 
 .font-sz {
-  width: 40px;
+  width: auto;
   margin: 0 10px;
   border-radius: 2px;
   outline: none;
@@ -36,29 +35,6 @@
 }
 
 .font-sz:hover {
-  color: #004aad;
-}
-
-.font-btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.font-btn {
-  margin: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: black;
-  background-color: white;
-  border: none;
-  font-size: 20px;
-  /* transition: 0.3s; */
-}
-
-.font-btn:hover {
   color: #004aad;
 }
 

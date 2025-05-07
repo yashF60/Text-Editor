@@ -1,45 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./EditorFontOperations.css";
 
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { RxFontBold, RxFontItalic, RxUnderline } from "react-icons/rx";
 import { HiOutlineStrikethrough } from "react-icons/hi2";
 
 import { useEditor } from "../../context/EditorContext";
 
-const fontSizeMap = {
-  10: 1,
-  13: 2,
-  16: 3,
-  18: 4,
-  24: 5,
-  32: 6,
-  48: 7,
-};
-
-const fontSizes = Object.keys(fontSizeMap).map(Number);
-
 const EditorFontOperations = () => {
   const { handleCommand, activeFormats } = useEditor();
-  const [fontSize, setFontSize] = useState(16);
-
-  const changeFontSize = (direction) => {
-    const currentIndex = fontSizes.indexOf(fontSize);
-    let newIndex =
-      direction === "increase" ? currentIndex + 1 : currentIndex - 1;
-
-    if (newIndex >= 0 && newIndex < fontSizes.length) {
-      const newSize = fontSizes[newIndex];
-      setFontSize(newSize);
-      handleCommand("fontSize", fontSizeMap[newSize]);
-    }
-  };
-
-  const handleFontSizeChange = (e) => {
-    const newSize = Number(e.target.value);
-    setFontSize(newSize);
-    handleCommand("fontSize", fontSizeMap[newSize]);
-  };
 
   return (
     <div className="font-op">
@@ -54,32 +22,41 @@ const EditorFontOperations = () => {
           <option value="Comic Sans MS">Comic Sans</option>
         </select>
 
+        {/* <select
+          className="font-sz"
+          onChange={(e) => handleCommand(e.target.value)}
+        >
+          <option value="Normal">Normal</option>
+          <option value="Heading1">Heading1</option>
+          <option value="Heading2">Heading2</option>
+          <option value="Quote">Quote</option>
+        </select> */}
         <select
           className="font-sz"
-          value={fontSize}
-          onChange={handleFontSizeChange}
+          onChange={(e) => {
+            const value = e.target.value;
+            switch (value) {
+              case "Heading1":
+                handleCommand("formatBlock", "<h1>");
+                break;
+              case "Heading2":
+                handleCommand("formatBlock", "<h2>");
+                break;
+              case "Quote":
+                handleCommand("formatBlock", "<blockquote>");
+                break;
+              case "Normal":
+              default:
+                handleCommand("formatBlock", "<p>");
+                break;
+            }
+          }}
         >
-          {fontSizes.map((size) => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
+          <option value="Normal">Normal</option>
+          <option value="Heading1">Heading 1</option>
+          <option value="Heading2">Heading 2</option>
+          <option value="Quote">Quote</option>
         </select>
-
-        <div className="font-btns">
-          <button
-            className="font-btn"
-            onClick={() => changeFontSize("increase")}
-          >
-            <MdKeyboardArrowUp />
-          </button>
-          <button
-            className="font-btn"
-            onClick={() => changeFontSize("decrease")}
-          >
-            <MdKeyboardArrowDown />
-          </button>
-        </div>
       </div>
 
       <div className="bottom-font-op">
