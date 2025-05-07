@@ -1,11 +1,28 @@
-.main-app {
+.main-app{
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+
+.editor-section {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 900px;
   border-radius: 10px;
-  margin:20px;
+  margin: 20px;
+  box-shadow: 2px 2px 12px black;
+}
+
+.display-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 900px;
+  border-radius: 10px;
+  margin: 20px;
   box-shadow: 2px 2px 12px black;
 }
 

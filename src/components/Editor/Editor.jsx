@@ -14,29 +14,12 @@ const Editor = () => {
     editorRef,
     updateActiveFormats,
     wordCount,
-    setWordCount,
+    handleInput,
     setSelectedLinkNode,
     setShowLinkModal,
+    setSubmittedContent,
+    content,
   } = useEditor();
-
-  const handleInput = () => {
-    const text = editorRef.current?.innerText || "";
-
-    if (text.length > 2500) {
-      const trimmed = text.slice(0, 2500);
-      editorRef.current.innerText = trimmed;
-      setWordCount(2500);
-
-      const range = document.createRange();
-      const selection = window.getSelection();
-      range.selectNodeContents(editorRef.current);
-      range.collapse(false);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    } else {
-      setWordCount(text.length);
-    }
-  };
 
   const handleClick = (e) => {
     updateActiveFormats();
@@ -68,9 +51,19 @@ const Editor = () => {
       />
 
       <LinkModal />
-      <p className="word-count">
-        {wordCount}/{2500}
-      </p>
+      <div className="editor-footer">
+        <button
+          onClick={() => {
+            setSubmittedContent(content), console.log("Clicked");
+          }}
+          className="submit-button"
+        >
+          Submit
+        </button>
+        <p className="word-count">
+          {wordCount}/{2500}
+        </p>
+      </div>
     </div>
   );
 };

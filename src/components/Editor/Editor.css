@@ -50,11 +50,27 @@ font[face="Comic Sans MS"] {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  margin: 20px 20px 0 0;
 }
 
 .main-editor a {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.editor-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 20px 0 20px;
+}
+
+.submit-button{
+  background-color: #004aad;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
 }
