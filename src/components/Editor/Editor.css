@@ -18,7 +18,7 @@
 .main-text-area {
   width: 100%;
   resize: none;
-  padding: 10px 10px 10px 20px;
+  padding: 20px;
   border: 1px solid #cccccc;
   color: #555555;
 }

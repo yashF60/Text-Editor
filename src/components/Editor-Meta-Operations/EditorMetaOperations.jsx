@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./EditorMetaOperations.css";
 
 import { IoMdLink } from "react-icons/io";
@@ -9,6 +9,13 @@ const EditorMetaOperations = () => {
   const { handleCommand, saveSelection, restoreSelection } = useEditor();
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [url, setUrl] = useState("");
+  const urlInputRef = useRef(null);
+
+  useEffect(() => {
+    if (showLinkInput && urlInputRef.current) {
+      urlInputRef.current.focus();
+    }
+  }, [showLinkInput]);
 
   const handleAddLink = () => {
     if (url.trim()) {
@@ -79,18 +86,19 @@ const EditorMetaOperations = () => {
       </div>
 
       {showLinkInput && (
-        <div className="link-input-wrapper">
+        <form type="dialog" className="link-input-wrapper">
           <input
             type="text"
             placeholder="Enter URL"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             className="link-input"
+            ref={urlInputRef}
           />
           <button onClick={handleAddLink} className="apply-link-btn">
             Add
           </button>
-        </div>
+        </form>
       )}
     </div>
   );

@@ -57,15 +57,6 @@ const Editor = () => {
         <EditorAlignmentOperations />
         <EditorMetaOperations />
       </div>
-      {/* <div
-        ref={editorRef}
-        contentEditable={true}
-        className="main-text-area"
-        onInput={handleInput}
-        onClick={handleFormatUpdate}
-        onKeyUp={handleFormatUpdate}
-        suppressContentEditableWarning={true}
-      /> */}
       <div
         ref={editorRef}
         contentEditable={true}
