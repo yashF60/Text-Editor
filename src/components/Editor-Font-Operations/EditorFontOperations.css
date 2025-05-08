@@ -64,10 +64,6 @@
 
 /* ............................................ */
 
-.main-text-area font[size] {
-  font-size: inherit !important;
-}
-
 .font-btn.active {
   color: #004aad;
   transition: 0s;
