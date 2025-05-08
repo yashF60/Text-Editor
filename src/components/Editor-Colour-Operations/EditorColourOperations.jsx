@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./EditorColourOperations.css";
-
-import { FaSquare } from "react-icons/fa";
-
-import { BiFontColor } from "react-icons/bi";
 import { useEditor } from "../../context/EditorContext";
+import { Icons } from "../../utils/icons";
+
+const { FontColor, HighlightSquare } = Icons;
 
 const EditorColourOperations = () => {
   const { handleCommand } = useEditor();
@@ -28,7 +27,7 @@ const EditorColourOperations = () => {
       <div className="colour-op">
         <button className="colour-op-btn">
           <label htmlFor="font-color-picker" style={{ cursor: "pointer" }}>
-            <BiFontColor style={{ color: fontColor }} />
+            <FontColor style={{ color: fontColor }} />
           </label>
           <input
             id="font-color-picker"
@@ -42,7 +41,7 @@ const EditorColourOperations = () => {
         <button className="colour-op-btn">
           <label htmlFor="highlight-color-picker" style={{ cursor: "pointer" }}>
             <div className="fill-colour">
-              <FaSquare style={{ color: highlightColor }} />
+              <HighlightSquare style={{ color: highlightColor }} />
             </div>
           </label>
           <input

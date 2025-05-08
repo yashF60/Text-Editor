@@ -1,14 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./EditorMetaOperations.css";
 
-import { IoMdLink } from "react-icons/io";
-import { BsCardImage } from "react-icons/bs";
 import { useEditor } from "../../context/EditorContext";
+import { Icons } from "../../utils/icons";
+
+const { Link, Image } = Icons;
 
 const EditorMetaOperations = () => {
   const { handleCommand, saveSelection, restoreSelection } = useEditor();
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [url, setUrl] = useState("");
+
   const urlInputRef = useRef(null);
 
   useEffect(() => {
@@ -17,7 +19,8 @@ const EditorMetaOperations = () => {
     }
   }, [showLinkInput]);
 
-  const handleAddLink = () => {
+  const handleAddLink = (e) => {
+    e.preventDefault();
     if (url.trim()) {
       restoreSelection();
       handleCommand("createLink", url);
@@ -67,14 +70,14 @@ const EditorMetaOperations = () => {
             setShowLinkInput((prev) => !prev);
           }}
         >
-          <IoMdLink />
+          <Link />
         </button>
 
         <button
           className="meta-op-btn"
           onClick={() => fileInputRef.current.click()}
         >
-          <BsCardImage />
+          <Image />
         </button>
         <input
           type="file"
@@ -86,7 +89,11 @@ const EditorMetaOperations = () => {
       </div>
 
       {showLinkInput && (
-        <form type="dialog" className="link-input-wrapper">
+        <form
+          type="dialog"
+          className="link-input-wrapper"
+          onSubmit={handleAddLink}
+        >
           <input
             type="text"
             placeholder="Enter URL"
@@ -95,7 +102,7 @@ const EditorMetaOperations = () => {
             className="link-input"
             ref={urlInputRef}
           />
-          <button onClick={handleAddLink} className="apply-link-btn">
+          <button type="submit" className="apply-link-btn">
             Add
           </button>
         </form>

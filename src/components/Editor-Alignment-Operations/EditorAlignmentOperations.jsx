@@ -1,15 +1,18 @@
 import React from "react";
 import "./EditorAlignmentOperations.css";
 
-import {
-  CiTextAlignLeft,
-  CiTextAlignCenter,
-  CiTextAlignRight,
-  CiTextAlignJustify,
-} from "react-icons/ci";
-import { MdFormatListBulleted, MdFormatListNumbered } from "react-icons/md";
-
 import { useEditor } from "../../context/EditorContext";
+
+import { Icons } from "../../utils/icons";
+
+const {
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
+  UnorderedList,
+  OrderedList,
+} = Icons;
 
 const EditorAlignmentOperations = () => {
   const { handleCommand, activeFormats } = useEditor();
@@ -25,7 +28,7 @@ const EditorAlignmentOperations = () => {
               color: activeFormats.justifyLeft ? "#004aad" : "inherit",
             }}
           >
-            <CiTextAlignLeft />
+            <AlignLeft />
           </button>
           <button
             className="align-op-btn"
@@ -34,7 +37,7 @@ const EditorAlignmentOperations = () => {
               color: activeFormats.justifyCenter ? "#004aad" : "inherit",
             }}
           >
-            <CiTextAlignCenter />
+            <AlignCenter />
           </button>
           <button
             className="align-op-btn"
@@ -43,7 +46,7 @@ const EditorAlignmentOperations = () => {
               color: activeFormats.justifyRight ? "#004aad" : "inherit",
             }}
           >
-            <CiTextAlignRight />
+            <AlignRight />
           </button>
           <button
             className="align-op-btn"
@@ -52,7 +55,7 @@ const EditorAlignmentOperations = () => {
               color: activeFormats.justifyFull ? "#004aad" : "inherit",
             }}
           >
-            <CiTextAlignJustify />
+            <AlignJustify />
           </button>
         </div>
         <div className="bottom-align-op">
@@ -63,14 +66,16 @@ const EditorAlignmentOperations = () => {
               color: activeFormats.unorderedList ? "#004aad" : "inherit",
             }}
           >
-            <MdFormatListBulleted />
+            <UnorderedList />
           </button>
           <button
             className="align-op-btn"
             onClick={() => handleCommand("insertOrderedList")}
-            style={{ color: activeFormats.orderedList ? "#004aad" : "inherit" }}
+            style={{
+              color: activeFormats.orderedList ? "#004aad" : "inherit",
+            }}
           >
-            <MdFormatListNumbered />
+            <OrderedList />
           </button>
         </div>
       </div>

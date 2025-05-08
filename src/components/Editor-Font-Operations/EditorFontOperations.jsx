@@ -1,13 +1,30 @@
 import React from "react";
 import "./EditorFontOperations.css";
-
-import { RxFontBold, RxFontItalic, RxUnderline } from "react-icons/rx";
-import { HiOutlineStrikethrough } from "react-icons/hi2";
-
 import { useEditor } from "../../context/EditorContext";
+import { Icons } from "../../utils/icons";
+
+const { Bold, Italic, Underline, Strikethrough } = Icons;
 
 const EditorFontOperations = () => {
   const { handleCommand, activeFormats } = useEditor();
+
+  const applyFormatBlock = (value) => {
+    switch (value) {
+      case "Heading1":
+        handleCommand("formatBlock", "<h1>");
+        break;
+      case "Heading2":
+        handleCommand("formatBlock", "<h2>");
+        break;
+      case "Quote":
+        handleCommand("formatBlock", "<blockquote>");
+        break;
+      case "Normal":
+      default:
+        handleCommand("formatBlock", "<p>");
+        break;
+    }
+  };
 
   return (
     <div className="font-op">
@@ -21,36 +38,9 @@ const EditorFontOperations = () => {
           <option value="Roboto">Roboto</option>
           <option value="Comic Sans MS">Comic Sans</option>
         </select>
-
-        {/* <select
-          className="font-sz"
-          onChange={(e) => handleCommand(e.target.value)}
-        >
-          <option value="Normal">Normal</option>
-          <option value="Heading1">Heading1</option>
-          <option value="Heading2">Heading2</option>
-          <option value="Quote">Quote</option>
-        </select> */}
         <select
           className="font-sz"
-          onChange={(e) => {
-            const value = e.target.value;
-            switch (value) {
-              case "Heading1":
-                handleCommand("formatBlock", "<h1>");
-                break;
-              case "Heading2":
-                handleCommand("formatBlock", "<h2>");
-                break;
-              case "Quote":
-                handleCommand("formatBlock", "<blockquote>");
-                break;
-              case "Normal":
-              default:
-                handleCommand("formatBlock", "<p>");
-                break;
-            }
-          }}
+          onChange={(e) => applyFormatBlock(e.target.value)}
         >
           <option value="Normal">Normal</option>
           <option value="Heading1">Heading 1</option>
@@ -64,25 +54,27 @@ const EditorFontOperations = () => {
           onClick={() => handleCommand("bold")}
           style={{ color: activeFormats.bold ? "#004aad" : "inherit" }}
         >
-          <RxFontBold />
+          <Bold />
         </button>
         <button
           onClick={() => handleCommand("italic")}
           style={{ color: activeFormats.italic ? "#004aad" : "inherit" }}
         >
-          <RxFontItalic />
+          <Italic />
         </button>
         <button
           onClick={() => handleCommand("underline")}
           style={{ color: activeFormats.underline ? "#004aad" : "inherit" }}
         >
-          <RxUnderline />
+          <Underline />
         </button>
         <button
           onClick={() => handleCommand("strikeThrough")}
-          style={{ color: activeFormats.strikeThrough ? "#004aad" : "inherit" }}
+          style={{
+            color: activeFormats.strikeThrough ? "#004aad" : "inherit",
+          }}
         >
-          <HiOutlineStrikethrough />
+          <Strikethrough />
         </button>
       </div>
     </div>

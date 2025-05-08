@@ -2,7 +2,9 @@ import React from "react";
 import "./LinkModal.css";
 import { useEditor } from "../../context/EditorContext";
 
-import { IoIosClose } from "react-icons/io";
+import { Icons } from "../../utils/icons";
+
+const { Close } = Icons;
 
 const LinkModal = () => {
   const {
@@ -40,7 +42,7 @@ const LinkModal = () => {
     <div className="main-link-modal">
       <div className="modal-content">
         <div className="close-modal" onClick={handleClose}>
-          <IoIosClose />
+          <Close />
         </div>
         <form action="dialog">
           <h2>Link</h2>
