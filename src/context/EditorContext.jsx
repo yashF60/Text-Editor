@@ -71,7 +71,8 @@ export const EditorProvider = ({ children }) => {
       editorRef.current.focus();
       updateActiveFormats();
     },
-    [updateActiveFormats]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   //--------------------------------------------------//
@@ -120,29 +121,6 @@ export const EditorProvider = ({ children }) => {
       document.removeEventListener("selectionchange", updateActiveFormats);
     };
   }, [updateActiveFormats]);
-
-  // const handleInput = () => {
-  //   setContent(editorRef.current.innerHTML);
-  //   setWordCount(editorRef.current?.innerText.length || 0);
-  //   updateActiveFormats();
-
-  //   const text = editorRef.current?.innerText || "";
-
-  //   if (text.length > 2500) {
-  //     const trimmed = text.slice(0, 2500);
-  //     editorRef.current.innerText = trimmed;
-  //     setWordCount(2500);
-
-  //     const range = document.createRange();
-  //     const selection = window.getSelection();
-  //     range.selectNodeContents(editorRef.current);
-  //     range.collapse(false);
-  //     selection.removeAllRanges();
-  //     selection.addRange(range);
-  //   } else {
-  //     setWordCount(text.length);
-  //   }
-  // };
 
   // optimised !!!!
   // eslint-disable-next-line react-hooks/exhaustive-deps
