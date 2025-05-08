@@ -3,7 +3,12 @@ import "./EditorFontOperations.css";
 import { useEditor } from "../../context/EditorContext";
 import { Icons } from "../../utils/icons";
 
-const { Bold, Italic, Underline, Strikethrough } = Icons;
+const {
+  Bold,
+  Italic,
+  Underline,
+  Strikethrough,
+} = Icons;
 
 const EditorFontOperations = () => {
   const { handleCommand, activeFormats } = useEditor();
