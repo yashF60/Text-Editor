@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
 import React, {
   createContext,
   useContext,
@@ -25,58 +27,39 @@ export const EditorProvider = ({ children }) => {
     orderedList: false,
   });
 
+  // to pass data to display
   const [submittedContent, setSubmittedContent] = useState("");
 
+  // Link Modal
   const [showLinkModal, setShowLinkModal] = useState(false);
+  // On click <a/>
   const [selectedLinkNode, setSelectedLinkNode] = useState(null);
 
+  // Content Ref
   const editorRef = useRef(null);
+  // Main Content State
   const [content, setContent] = useState("");
+  // Word Count State
   const [wordCount, setWordCount] = useState(0);
 
-  const handleCommand = useCallback(
-    (command, value = null) => {
-      const selection = document.getSelection();
-      if (!selection.rangeCount) return;
+  // Handle all HTML operations
+  const handleCommand = useCallback((command, value = null) => {
+    const selection = document.getSelection();
+    if (!selection.rangeCount) return;
 
-      if (command === "fontSize") {
-        const size = parseInt(value);
-        if (size >= 1 && size <= 7) {
-          document.execCommand("fontSize", false, size);
+    if (command === "fontName") {
+      document.execCommand("fontName", false, value);
+    } else {
+      document.execCommand(command, false, value);
+    }
 
-          const fonts = editorRef.current.querySelectorAll("font[size]");
-          fonts.forEach((font) => {
-            const pxMap = {
-              1: "10px",
-              2: "13px",
-              3: "16px",
-              4: "18px",
-              5: "24px",
-              6: "32px",
-              7: "48px",
-            };
-            const sizeAttr = font.getAttribute("size");
-            if (pxMap[sizeAttr]) {
-              font.removeAttribute("size");
-              font.style.fontSize = pxMap[sizeAttr];
-            }
-          });
-        }
-      } else if (command === "fontName") {
-        document.execCommand("fontName", false, value);
-      } else {
-        document.execCommand(command, false, value);
-      }
-
-      editorRef.current.focus();
-      updateActiveFormats();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+    editorRef.current.focus();
+    updateActiveFormats();
+  }, []);
 
   //--------------------------------------------------//
 
+  // Update hover and active colours
   const updateActiveFormats = useCallback(() => {
     const selection = window.getSelection();
     const range = selection.getRangeAt(0);
@@ -123,7 +106,7 @@ export const EditorProvider = ({ children }) => {
   }, [updateActiveFormats]);
 
   // optimised !!!!
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Input handler
   const handleInput = useCallback(() => {
     const text = editorRef.current?.innerText || "";
     const limitedText = text.slice(0, 2500);
@@ -207,5 +190,4 @@ export const EditorProvider = ({ children }) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useEditor = () => useContext(EditorContext);
