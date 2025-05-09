@@ -48,7 +48,7 @@ import {
   AlignJustify,
   List,
   ListOrdered,
-  Pen,       // Replaces TextColor
+  Pen,
   Square,
   Bold,
   Italic,

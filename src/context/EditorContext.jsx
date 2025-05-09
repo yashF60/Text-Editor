@@ -98,13 +98,6 @@ export const EditorProvider = ({ children }) => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   document.addEventListener("selectionchange", updateActiveFormats);
-  //   return () => {
-  //     document.removeEventListener("selectionchange", updateActiveFormats);
-  //   };
-  // }, [updateActiveFormats]);
-
   useEffect(() => {
     const handleSelectionChange = () => {
       updateActiveFormats();
