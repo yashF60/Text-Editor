@@ -16,6 +16,18 @@ const EditorFontOperations = () => {
       case "Heading2":
         handleCommand("formatBlock", "<h2>");
         break;
+      case "Heading3":
+        handleCommand("formatBlock", "<h3>");
+        break;
+      case "Heading4":
+        handleCommand("formatBlock", "<h4>");
+        break;
+      case "Heading5":
+        handleCommand("formatBlock", "<h5>");
+        break;
+      case "Heading6":
+        handleCommand("formatBlock", "<h6>");
+        break;
       case "Quote":
         handleCommand("formatBlock", "<blockquote>");
         break;
@@ -42,9 +54,29 @@ const EditorFontOperations = () => {
           className="font-sz"
           onChange={(e) => applyFormatBlock(e.target.value)}
         >
-          <option value="Normal">Normal</option>
-          <option value="Heading1">Heading 1</option>
-          <option value="Heading2">Heading 2</option>
+          <option value="Normal">Normal text</option>
+          <option
+            value="Heading1"
+            className="font-size-option"
+            style={{ fontSize: "34px" }}
+          >
+            Heading 1
+          </option>
+          <option value="Heading2" style={{ fontSize: "30px" }}>
+            Heading 2
+          </option>
+          <option value="Heading3" style={{ fontSize: "24px" }}>
+            Heading 3
+          </option>
+          <option value="Heading4" style={{ fontSize: "20px" }}>
+            Heading 4
+          </option>
+          <option value="Heading5" style={{ fontSize: "18px" }}>
+            Heading 5
+          </option>
+          <option value="Heading6" style={{ fontSize: "16px" }}>
+            Heading 6
+          </option>
           <option value="Quote">Quote</option>
         </select>
       </div>

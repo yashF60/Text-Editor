@@ -98,10 +98,20 @@ export const EditorProvider = ({ children }) => {
     });
   }, []);
 
+  // useEffect(() => {
+  //   document.addEventListener("selectionchange", updateActiveFormats);
+  //   return () => {
+  //     document.removeEventListener("selectionchange", updateActiveFormats);
+  //   };
+  // }, [updateActiveFormats]);
+
   useEffect(() => {
-    document.addEventListener("selectionchange", updateActiveFormats);
+    const handleSelectionChange = () => {
+      updateActiveFormats();
+    };
+    document.addEventListener("selectionchange", handleSelectionChange);
     return () => {
-      document.removeEventListener("selectionchange", updateActiveFormats);
+      document.removeEventListener("selectionchange", handleSelectionChange);
     };
   }, [updateActiveFormats]);
 

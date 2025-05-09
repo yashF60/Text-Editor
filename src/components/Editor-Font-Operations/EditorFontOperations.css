@@ -38,6 +38,11 @@
   color: #004aad;
 }
 
+.font-size-option{
+  width: 100px;
+  padding: 20px;
+}
+
 .bottom-font-op {
   display: flex;
   align-items: center;
