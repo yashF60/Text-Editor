@@ -109,9 +109,10 @@ export const EditorProvider = ({ children }) => {
   // Input handler
   const handleInput = useCallback(() => {
     const text = editorRef.current?.innerText || "";
-    const limitedText = text.slice(0, 2500);
+    const trimmedText = text.trim();
+    const limitedText = trimmedText.slice(0, 2500);
 
-    if (text.length > 2500) {
+    if (trimmedText.length > 2500) {
       editorRef.current.innerText = limitedText;
       const range = document.createRange();
       const selection = window.getSelection();
@@ -122,9 +123,9 @@ export const EditorProvider = ({ children }) => {
     }
 
     setContent(editorRef.current.innerHTML);
-    setWordCount(Math.min(text.length, 2500));
+    setWordCount(Math.min(trimmedText.length, 2500));
     updateActiveFormats();
-  });
+  }, [updateActiveFormats]);
 
   //--------------------------------------------------//
 

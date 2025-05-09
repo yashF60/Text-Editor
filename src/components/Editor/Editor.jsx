@@ -58,7 +58,7 @@ const Editor = () => {
           }}
           className="submit-button"
         >
-          Submit
+          Save
         </button>
         <p className="word-count">
           {wordCount}/{2500}
